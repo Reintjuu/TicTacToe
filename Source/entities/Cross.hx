@@ -5,11 +5,14 @@ import openfl.events.Event;
 
 class Cross extends Sprite
 {
-	public function new(x:Float, y:Float)
+	private var size:Float;
+
+	public function new(x:Float, y:Float, size:Float)
 	{
 		super();
 		this.x = x;
 		this.y = y;
+		this.size = size;
 		addEventListener(Event.ADDED_TO_STAGE, added);
 	}
 
@@ -21,8 +24,8 @@ class Cross extends Sprite
 		var thickness:Int = 10;
 		var offset:Int = 15;
 
-		var first:Line = new Line(0 + offset, 0 + offset, 100 - offset, 100 - offset, duration, thickness, 0x00FF00);
-		var second:Line = new Line(100 - offset, 0 + offset, 0 + offset, 100 - offset, duration, thickness, 0x00FF00, duration);
+		var first:Line = new Line(0 + offset, 0 + offset, size - offset, size - offset, duration, thickness, 0x00FF00);
+		var second:Line = new Line(size - offset, 0 + offset, 0 + offset, size - offset, duration, thickness, 0x00FF00, duration);
 		addChild(first);
 		addChild(second);
 	}

@@ -4,7 +4,6 @@
     <option name="buildConfig" value="3" />
     <option name="haxeTarget" value="Flash" />
     <option name="mainClass" value="Main" />
-    <option name="openFLTarget" value="HTML5" />
     <option name="outputFolder" value="$MODULE_DIR$/out/production/TicTacToe" />
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
@@ -16,35 +15,46 @@
     <orderEntry type="jdk" jdkName="Haxe 3.2.1" jdkType="Haxe toolkit" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="haxelib|C:/Development/Tools/HaxeToolkit/haxe/lib/openfl/3,6,0">
+      <library name="haxelib|openfl">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/openfl/3,6,0" />
+          <root url="D:\Tools\HaxeToolkit\haxe\lib\openfl/3,6,0/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/openfl/3,6,0" />
+          <root url="D:\Tools\HaxeToolkit\haxe\lib\openfl/3,6,0/" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="haxelib|C:/Development/Tools/HaxeToolkit/haxe/lib/lime/2,9,0">
+      <library name="haxelib|D:/Tools/HaxeToolkit/haxe/lib/openfl/3,6,0">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/lime/2,9,0" />
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/openfl/3,6,0" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/lime/2,9,0" />
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/openfl/3,6,0" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="haxelib|C:/Development/Tools/HaxeToolkit/haxe/lib/actuate/1,8,6">
+      <library name="haxelib|D:/Tools/HaxeToolkit/haxe/lib/lime/2,9,0">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/actuate/1,8,6" />
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/lime/2,9,0" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/actuate/1,8,6" />
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/lime/2,9,0" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="haxelib|D:/Tools/HaxeToolkit/haxe/lib/actuate/1,8,6">
+        <CLASSES>
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/actuate/1,8,6" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/actuate/1,8,6" />
         </SOURCES>
       </library>
     </orderEntry>
