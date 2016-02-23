@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="TicTacToe" package="com.teabagentertainment.tictactoe" version="1.0.0" company="Teabag Entertainment" />
+	<app main="Main" path="Export" file="TicTacToe" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
+	
+	<assets path="Assets" rename="assets" />
+	
+</project>
