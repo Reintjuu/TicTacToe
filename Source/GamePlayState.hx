@@ -1,10 +1,9 @@
 package;
 
+import entities.Circle;
 import entities.Board;
 import entities.Cross;
-import UInt;
 import openfl.geom.Point;
-import entities.Line;
 import openfl.display.Sprite;
 
 /**
@@ -47,10 +46,12 @@ class GamePlayState implements IState
 	{
 		var center:Point = new Point(game.stage.stageWidth * .5, game.stage.stageHeight * .5);
 		game.addChild(new Board(center.x, center.y, 300, onAnimationComplete));
+
 	}
 
 	private function onAnimationComplete():Void
 	{
-		game.addChild(new Cross(game.stage.stageWidth * .5 - 50, game.stage.stageHeight * .5 - 50, 100));
+		game.addChild(new Cross(game.stage.stageWidth * .5 - 50, game.stage.stageHeight * .5 - 50, 100, 10, 0x00FF00, .5));
+		game.addChild(new Circle(game.stage.stageWidth * .5 - 50, game.stage.stageHeight * .5 - 50, 50, 10, 0x0000FF, 2));
 	}
 }

@@ -8,21 +8,21 @@ typedef Position = { startX:Float, startY:Float, endX:Float, endY:Float };
 class Board extends Sprite
 {
 	private var size:Float;
-	private var onAnimationComplete:Void->Void;
+	private var onAnimationComplete:Void -> Void;
 
-	public function new(x:Float, y:Float, size:Float, onAnimationComplete:Void->Void)
+	public function new(x:Float, y:Float, size:Float, onAnimationComplete:Void -> Void)
 	{
 		super();
 		this.x = x;
 		this.y = y;
 		this.size = size;
 		this.onAnimationComplete = onAnimationComplete;
+
 		addEventListener(Event.ADDED_TO_STAGE, added);
 	}
 
 	private function added(e)
 	{
-		trace(this.x + " " + this.y);
 		var positions:Array<Position> = [
 			{startX: -size * .5, startY: -size / 6, endX: size * .5, endY: -size / 6},
 			{startX: -size * .5, startY: size / 6, endX: size * .5, endY: size / 6},
@@ -39,7 +39,7 @@ class Board extends Sprite
 		for (p in positions)
 		{
 			var line:Line = new Line(p.startX, p.startY, p.endX, p.endY, duration, thickness, color, animationDelay * i);
-			if (i == positions.length - 1) line.onAnimationComplete(onAnimationComplete);
+			if (i == positions.length - 1) line.setOnAnimationComplete(onAnimationComplete);
 			addChild(line);
 			i++;
 		}
