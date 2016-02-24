@@ -18,33 +18,44 @@
     <orderEntry type="module-library">
       <library name="haxelib|C:/Development/Tools/HaxeToolkit/haxe/lib/openfl/3,6,0">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/openfl/3,6,0" />
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/openfl/3,6,0" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/openfl/3,6,0" />
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/openfl/3,6,0" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library name="haxelib|C:/Development/Tools/HaxeToolkit/haxe/lib/lime/2,9,0">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/lime/2,9,0" />
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/lime/2,9,0" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/lime/2,9,0" />
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/lime/2,9,0" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library name="haxelib|C:/Development/Tools/HaxeToolkit/haxe/lib/actuate/1,8,6">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/actuate/1,8,6" />
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/actuate/1,8,6" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$MODULE_DIR$/../../Tools/HaxeToolkit/haxe/lib/actuate/1,8,6" />
+          <root url="file://D:/Tools/HaxeToolkit/haxe/lib/actuate/1,8,6" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="haxelib|openfl">
+        <CLASSES>
+          <root url="D:\Tools\HaxeToolkit\haxe\lib\openfl/3,6,0/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="D:\Tools\HaxeToolkit\haxe\lib\openfl/3,6,0/" />
         </SOURCES>
       </library>
     </orderEntry>

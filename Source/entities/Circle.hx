@@ -17,15 +17,13 @@ class Circle extends Sprite
 	private var duration:Float;
 	private var onAnimationComplete:Void -> Void;
 
-	public var i:Float = 0;
-	private var p:Point;
+	private var currentAngle:Float = 0;
 
 	public function new(x:Float, y:Float, radius:Float, thickness:Float, color:Int, duration:Float, ?onAnimationComplete:Void -> Void)
 	{
 		super();
 		this.x = x + radius;
 		this.y = y + radius;
-		this.point = new Point(x, y);
 		this.radius = radius * .8;
 		this.thickness = thickness;
 		this.color = color;
@@ -38,10 +36,34 @@ class Circle extends Sprite
 	private function added(e)
 	{
 		removeEventListener(Event.ADDED_TO_STAGE, added);
-		Actuate.tween(this, duration, { i: 360 }).ease(Quint.easeOut).onUpdate(render).onComplete(onAnimationComplete);
+		Actuate.tween(this, duration, { currentAngle: 360 }).ease(Quint.easeOut).onUpdate(render).onComplete(onAnimationComplete);
 	}
 
-	function drawArc(arcRef:Sprite, sx:Int, sy:Int, radius:Int, arc:Float, startAngle:Int = 0)
+	private function render()
+	{
+		graphics.clear();
+
+		graphics.beginFill(color, 1);
+		drawWedge(this, 0, 0, radius, currentAngle, -90);
+
+		/* I actually wanted to code it like (with one begin- and endFill)...
+		 *
+		 * // Subtract out the middle by drawing a new wedge over the top of the previous one.
+		 * drawWedge(this, 0, 0, radius - thickness, currentAngle, -90);
+		 *
+		 * ...but HTML5 doesn't support it this way as it's not cutting out the middle part of the wedge. Of course all
+		 * other targets have no problems with this, but I simply have to do it in this ugly way to be FULLY cross-platform.
+		 */
+
+		graphics.endFill();
+
+		// Subtract out the middle by drawing a circle over the top of the drawn wedge.
+		graphics.beginFill(stage.color, 1);
+		graphics.drawCircle(0, 0, radius - thickness);
+		graphics.endFill();
+	}
+
+	private function drawWedge(sprite:Sprite, startX:Int, startY:Int, radius:Float, arc:Float, startAngle:Int = 0)
 	{
 		var segAngle:Float;
 		var angle:Float;
@@ -55,7 +77,7 @@ class Circle extends Sprite
 		var cy:Float;
 
 		// Move the pen.
-		arcRef.graphics.moveTo(sx, sy);
+		sprite.graphics.moveTo(startX, startY);
 
 		// No need to draw more than 360.
 		if (Math.abs(arc) > 360)
@@ -69,35 +91,25 @@ class Circle extends Sprite
 		angle = (startAngle / 180) * Math.PI;
 
 		// Calculate the start point.
-		ax = sx + Math.cos(angle) * radius;
-		ay = sy + Math.sin(angle) * radius;
+		ax = startX + Math.cos(angle) * radius;
+		ay = startY + Math.sin(angle) * radius;
 
 		// Draw the first line.
-		arcRef.graphics.lineTo(ax, ay);
+		sprite.graphics.lineTo(ax, ay);
 
-		// Draw the arc.
+		// Draw the wedge.
 		for (i in 0...numOfSegs)
 		{
 			angle += segAngle;
-			angleMid = angle - (segAngle / 2);
-			bx = sx + Math.cos(angle) * radius;
-			by = sy + Math.sin(angle) * radius;
-			cx = sx + Math.cos(angleMid) * (radius / Math.cos(segAngle / 2));
-			cy = sy + Math.sin(angleMid) * (radius / Math.cos(segAngle / 2));
-			arcRef.graphics.curveTo(cx, cy, bx, by);
+			angleMid = angle - (segAngle * .5);
+			bx = startX + Math.cos(angle) * radius;
+			by = startY + Math.sin(angle) * radius;
+			cx = startX + Math.cos(angleMid) * (radius / Math.cos(segAngle * .5));
+			cy = startY + Math.sin(angleMid) * (radius / Math.cos(segAngle * .5));
+			sprite.graphics.curveTo(cx, cy, bx, by);
 		}
 
 		// Close the wedge.
-		arcRef.graphics.lineTo(sx, sy);
-	}
-
-	private function render()
-	{
-		graphics.clear();
-		graphics.beginFill(0x0000FF, 1);
-		drawArc(this, 0, 0, cast(radius), i, -90);
-		// Subtract out the middle by drawing a new circle over the top of it.
-		drawArc(this, 0, 0, cast(radius * .75), i, -90);
-		graphics.endFill();
+		sprite.graphics.lineTo(startX, startY);
 	}
 }
