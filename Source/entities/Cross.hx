@@ -29,7 +29,7 @@ class Cross extends Sprite
 	{
 		removeEventListener(Event.ADDED_TO_STAGE, added);
 
-		var offset:Float = size * .3;
+		var offset:Float = size * .15;
 
 		var first:Line = new Line(0 + offset, 0 + offset, size - offset, size - offset, duration, thickness, color);
 		var second:Line = new Line(size - offset, 0 + offset, 0 + offset, size - offset, duration, thickness, color, duration, onAnimationComplete);

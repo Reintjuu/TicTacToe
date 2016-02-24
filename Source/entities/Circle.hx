@@ -3,7 +3,6 @@ package entities;
 import openfl.display.Graphics;
 import Math;
 import openfl.geom.Point;
-import motion.MotionPath;
 import motion.easing.Quint;
 import motion.Actuate;
 import openfl.events.Event;
@@ -18,6 +17,7 @@ class Circle extends Sprite
 	private var duration:Float;
 	private var onAnimationComplete:Void -> Void;
 
+	public var i:Float = 0;
 	private var p:Point;
 
 	public function new(x:Float, y:Float, radius:Float, thickness:Float, color:Int, duration:Float, ?onAnimationComplete:Void -> Void)
@@ -26,7 +26,7 @@ class Circle extends Sprite
 		this.x = x + radius;
 		this.y = y + radius;
 		this.point = new Point(x, y);
-		this.radius = radius * .7;
+		this.radius = radius * .8;
 		this.thickness = thickness;
 		this.color = color;
 		this.duration = duration;
@@ -38,27 +38,66 @@ class Circle extends Sprite
 	private function added(e)
 	{
 		removeEventListener(Event.ADDED_TO_STAGE, added);
+		Actuate.tween(this, duration, { i: 360 }).ease(Quint.easeOut).onUpdate(render).onComplete(onAnimationComplete);
+	}
 
-		graphics.clear();
-		graphics.lineStyle(thickness, color, 1, true);
+	function drawArc(arcRef:Sprite, sx:Int, sy:Int, radius:Int, arc:Float, startAngle:Int = 0)
+	{
+		var segAngle:Float;
+		var angle:Float;
+		var angleMid:Float;
+		var numOfSegs:Int;
+		var ax:Float;
+		var ay:Float;
+		var bx:Float;
+		var by:Float;
+		var cx:Float;
+		var cy:Float;
 
-		var path = new MotionPath();
-		var stepsize:Float = .05;
-		var angle:Float = 0;
-		while (angle < 2 * Math.PI)
+		// Move the pen.
+		arcRef.graphics.moveTo(sx, sy);
+
+		// No need to draw more than 360.
+		if (Math.abs(arc) > 360)
 		{
-			point.x = radius * Math.cos(angle);
-			point.y = radius * Math.sin(angle);
-			if (angle == 0) graphics.moveTo(point.x, point.y);
-			path.line(point.x, point.y);
-			angle += stepsize;
+			arc = 360;
 		}
 
-		Actuate.motionPath(point, duration, {x: path.x, y: path.y }).ease(Quint.easeOut).onUpdate(render).onComplete(onAnimationComplete);
+		numOfSegs = Math.ceil(Math.abs(arc) / 45);
+		segAngle = arc / numOfSegs;
+		segAngle = (segAngle / 180) * Math.PI;
+		angle = (startAngle / 180) * Math.PI;
+
+		// Calculate the start point.
+		ax = sx + Math.cos(angle) * radius;
+		ay = sy + Math.sin(angle) * radius;
+
+		// Draw the first line.
+		arcRef.graphics.lineTo(ax, ay);
+
+		// Draw the arc.
+		for (i in 0...numOfSegs)
+		{
+			angle += segAngle;
+			angleMid = angle - (segAngle / 2);
+			bx = sx + Math.cos(angle) * radius;
+			by = sy + Math.sin(angle) * radius;
+			cx = sx + Math.cos(angleMid) * (radius / Math.cos(segAngle / 2));
+			cy = sy + Math.sin(angleMid) * (radius / Math.cos(segAngle / 2));
+			arcRef.graphics.curveTo(cx, cy, bx, by);
+		}
+
+		// Close the wedge.
+		arcRef.graphics.lineTo(sx, sy);
 	}
 
 	private function render()
 	{
-		graphics.lineTo(point.x, point.y);
+		graphics.clear();
+		graphics.beginFill(0x0000FF, 1);
+		drawArc(this, 0, 0, cast(radius), i, -90);
+		// Subtract out the middle by drawing a new circle over the top of it.
+		drawArc(this, 0, 0, cast(radius * .75), i, -90);
+		graphics.endFill();
 	}
 }
