@@ -17,7 +17,7 @@ class Board extends Sprite
 		this.y = y;
 		this.size = size;
 		this.onAnimationComplete = onAnimationComplete;
-
+		
 		addEventListener(Event.ADDED_TO_STAGE, added);
 	}
 
@@ -29,12 +29,12 @@ class Board extends Sprite
 			{startX: -size / 6, startY: -size * .5, endX: -size / 6, endY: size * .5},
 			{startX: size / 6, startY: -size * .5, endX: size / 6, endY: size * .5}
 		];
-
+		
 		var duration:UInt = 2;
 		var thickness:UInt = 10;
 		var color:UInt = 0xFF0000;
 		var animationDelay:Float = .5;
-
+		
 		var i:Int = 0;
 		for (p in positions)
 		{

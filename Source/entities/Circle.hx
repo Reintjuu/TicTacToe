@@ -29,7 +29,7 @@ class Circle extends Sprite
 		this.color = color;
 		this.duration = duration;
 		this.onAnimationComplete = onAnimationComplete;
-
+		
 		addEventListener(Event.ADDED_TO_STAGE, added);
 	}
 
@@ -84,19 +84,19 @@ class Circle extends Sprite
 		{
 			arc = 360;
 		}
-
+		
 		numOfSegs = Math.ceil(Math.abs(arc) / 45);
 		segAngle = arc / numOfSegs;
 		segAngle = (segAngle / 180) * Math.PI;
 		angle = (startAngle / 180) * Math.PI;
-
+		
 		// Calculate the start point.
 		ax = startX + Math.cos(angle) * radius;
 		ay = startY + Math.sin(angle) * radius;
-
+		
 		// Draw the first line.
 		sprite.graphics.lineTo(ax, ay);
-
+		
 		// Draw the wedge.
 		for (i in 0...numOfSegs)
 		{
@@ -108,7 +108,7 @@ class Circle extends Sprite
 			cy = startY + Math.sin(angleMid) * (radius / Math.cos(segAngle * .5));
 			sprite.graphics.curveTo(cx, cy, bx, by);
 		}
-
+		
 		// Close the wedge.
 		sprite.graphics.lineTo(startX, startY);
 	}

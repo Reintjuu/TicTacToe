@@ -19,7 +19,7 @@ class Cross extends Sprite
 		this.size = size;
 		this.thickness = thickness;
 		this.color = color;
-		this.duration = duration;
+		this.duration = duration * .5;
 		this.onAnimationComplete = onAnimationComplete;
 
 		addEventListener(Event.ADDED_TO_STAGE, added);

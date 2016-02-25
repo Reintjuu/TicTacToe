@@ -28,24 +28,23 @@ class Main extends Sprite
 	{
 		if (initialized) return;
 		initialized = true;
-
+		
 		createStateMachine();
 	}
 
 	function createStateMachine()
 	{
 		gameMode = new StateMachine();
-
+		
 		gameMode.add("mainmenu", new MainMenuState(gameMode, this));
 		gameMode.add("gameplay", new GamePlayState(gameMode, this));
 		gameMode.add("gameover", new GameOverState(gameMode, this));
-
+		
 		previousTime = Lib.getTimer();
-
+		
 		addEventListener(Event.ENTER_FRAME, update);
-
+		
 		gameMode.change("gameplay", 2);
-
 	}
 
 	function update(e)
@@ -53,7 +52,7 @@ class Main extends Sprite
 		var currentTime = Lib.getTimer();
 		var deltaTime = 0.001 * (currentTime - previousTime);
 		previousTime = Lib.getTimer();
-
+		
 		gameMode.update(deltaTime);
 		gameMode.render();
 	}
