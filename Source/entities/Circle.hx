@@ -54,13 +54,16 @@ class Circle extends Sprite
 		 * ...but HTML5 doesn't support it this way as it's not cutting out the middle part of the wedge. Of course all
 		 * other targets have no problems with this, but I simply have to do it in this ugly way to be FULLY cross-platform.
 		 */
-
+		#if !html5
+		drawWedge(this, 0, 0, radius - thickness, currentAngle, -90);
+		#end
 		graphics.endFill();
-
+		#if html5
 		// Subtract out the middle by drawing a circle over the top of the drawn wedge.
 		graphics.beginFill(stage.color, 1);
 		graphics.drawCircle(0, 0, radius - thickness);
 		graphics.endFill();
+		#end
 	}
 
 	private function drawWedge(sprite:Sprite, startX:Int, startY:Int, radius:Float, arc:Float, startAngle:Int = 0)
