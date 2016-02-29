@@ -8,10 +8,12 @@ class Cross extends Sprite
 	private var size:Float;
 	private var thickness:Float;
 	private var color:Int;
+	
+	private var animate:Bool;
 	private var duration:Float;
 	private var onAnimationComplete:Void -> Void;
 
-	public function new(x:Float, y:Float, size:Float, thickness:Float, color:Int, duration:Float, ?onAnimationComplete:Void -> Void)
+	public function new(x:Float, y:Float, size:Float, thickness:Float, color:Int, alpha:Float, animate:Bool, ?duration:Float, ?onAnimationComplete:Void -> Void)
 	{
 		super();
 		this.x = x;
@@ -19,6 +21,9 @@ class Cross extends Sprite
 		this.size = size;
 		this.thickness = thickness;
 		this.color = color;
+		this.alpha = alpha;
+		
+		this.animate = animate;
 		this.duration = duration * .5;
 		this.onAnimationComplete = onAnimationComplete;
 
@@ -31,8 +36,8 @@ class Cross extends Sprite
 
 		var offset:Float = size * .15;
 
-		var first:Line = new Line(0 + offset, 0 + offset, size - offset, size - offset, duration, thickness, color);
-		var second:Line = new Line(size - offset, 0 + offset, 0 + offset, size - offset, duration, thickness, color, duration, onAnimationComplete);
+		var first:Line = new Line(0 + offset, 0 + offset, size - offset, size - offset, thickness, color, animate, duration);
+		var second:Line = new Line(size - offset, 0 + offset, 0 + offset, size - offset, thickness, color, animate, duration, duration, onAnimationComplete);
 		addChild(first);
 		addChild(second);
 	}

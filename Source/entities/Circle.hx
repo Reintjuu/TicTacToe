@@ -14,12 +14,14 @@ class Circle extends Sprite
 	private var radius:Float;
 	private var thickness:Float;
 	private var color:Int;
+	
+	private var animate:Bool;
 	private var duration:Float;
 	private var onAnimationComplete:Void -> Void;
 
 	private var currentAngle:Float = 0;
 
-	public function new(x:Float, y:Float, radius:Float, thickness:Float, color:Int, duration:Float, ?onAnimationComplete:Void -> Void)
+	public function new(x:Float, y:Float, radius:Float, thickness:Float, color:Int, alpha:Float, animate:Bool, ?duration:Float, ?onAnimationComplete:Void -> Void)
 	{
 		super();
 		this.x = x + radius;
@@ -27,6 +29,9 @@ class Circle extends Sprite
 		this.radius = radius * .8;
 		this.thickness = thickness;
 		this.color = color;
+		this.alpha = alpha;
+		
+		this.animate = animate;
 		this.duration = duration;
 		this.onAnimationComplete = onAnimationComplete;
 		
@@ -36,7 +41,16 @@ class Circle extends Sprite
 	private function added(e)
 	{
 		removeEventListener(Event.ADDED_TO_STAGE, added);
-		Actuate.tween(this, duration, { currentAngle: 360 }).ease(Quint.easeOut).onUpdate(render).onComplete(onAnimationComplete);
+		
+		if (animate)
+		{
+			Actuate.tween(this, duration, { currentAngle: 360 }).ease(Quint.easeOut).onUpdate(render).onComplete(onAnimationComplete);
+		}
+		else
+		{
+			currentAngle = 360;
+			render();
+		}
 	}
 
 	private function render()

@@ -2,8 +2,7 @@ package entities;
 
 import openfl.events.Event;
 import openfl.display.Sprite;
-
-typedef Position = { startX:Float, startY:Float, endX:Float, endY:Float };
+import Main.Position;
 
 class Board extends Sprite
 {
@@ -23,6 +22,8 @@ class Board extends Sprite
 
 	private function added(e)
 	{
+		removeEventListener(Event.ADDED_TO_STAGE, added);
+		
 		var positions:Array<Position> = [
 			{startX: -size * .5, startY: -size / 6, endX: size * .5, endY: -size / 6},
 			{startX: -size * .5, startY: size / 6, endX: size * .5, endY: size / 6},
@@ -38,7 +39,7 @@ class Board extends Sprite
 		var i:Int = 0;
 		for (p in positions)
 		{
-			var line:Line = new Line(p.startX, p.startY, p.endX, p.endY, duration, thickness, color, animationDelay * i);
+			var line:Line = new Line(p.startX, p.startY, p.endX, p.endY, thickness, color, true, duration, animationDelay * i);
 			if (i == positions.length - 1) line.setOnAnimationComplete(onAnimationComplete);
 			addChild(line);
 			i++;
