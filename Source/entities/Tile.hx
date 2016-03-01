@@ -49,8 +49,8 @@ class Tile extends Sprite
 		addChild(ghostCircle);
 		addChild(ghostCross);
 		
-		circle = new Circle(0, 0, size * .5, 10, 0x4FDFC2, 1, true, 1, onAnimationComplete);
-		cross = new Cross(0, 0, size, 10, 0xFF8000, 1, true, 1, onAnimationComplete);
+		circle = new Circle(0, 0, size * .5, 10, 0x4FDFC2, 1, true, 1);
+		cross = new Cross(0, 0, size, 10, 0xFF8000, 1, true, 1);
 		
 		addButtonListeners();
 	}
@@ -108,10 +108,5 @@ class Tile extends Sprite
 		}
 		
 		dispatchEvent(new Event("TILE_ACTIVE"));
-	}
-	
-	private function onAnimationComplete()
-	{
-		state.drawWinLine();
 	}
 }

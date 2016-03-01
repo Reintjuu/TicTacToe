@@ -2,7 +2,8 @@ package entities;
 
 import openfl.events.Event;
 import openfl.display.Sprite;
-import Main.Position;
+
+typedef Position = { startX:Float, startY:Float, endX:Float, endY:Float };
 
 class Board extends Sprite
 {

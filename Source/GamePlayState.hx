@@ -7,7 +7,6 @@ import entities.Line;
 import entities.Tile;
 import openfl.geom.Point;
 import openfl.display.Sprite;
-import Main.Position;
 
 /**
  * State where all the game magic happens.
@@ -26,8 +25,6 @@ class GamePlayState implements IState
 	private var size:Float;
 	private var tiles:Array<Tile>;
 	private var winCombos:Array<Array<Int>> = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
-	private var endedGame:Bool = false;
-	private var linePosition:Position = { startX: 0, startY: 0, endX: 0, endY: 0 };
 	
 	public function new(sm:StateMachine, sprite:Sprite)
 	{
@@ -50,7 +47,6 @@ class GamePlayState implements IState
 		playerAmount = param;
 		turn = 0;
 		left = 10;
-		endedGame = false;
 		
 		size = Math.min(game.stage.stageWidth, game.stage.stageHeight) * .8;
 		game.addChild(new Board(game.stage.stageWidth * .5, game.stage.stageHeight * .5, size, addTiles));
@@ -121,11 +117,17 @@ class GamePlayState implements IState
 	private function endGame(combo:Array<Int> = null):Void
 	{
 		var curPos:Int = 0;
+		var won:Bool = combo != null;
+		
+		var startX:Float = 0;
+		var startY:Float = 0;
+		var endX:Float = 0;
+		var endY:Float = 0;
 		
 		for (i in 0...tiles.length)
 		{
 			tiles[i].removeButtonListeners();
-			if (combo != null)
+			if (won)
 			{
 				for (j in combo)
 				{             
@@ -134,25 +136,21 @@ class GamePlayState implements IState
 						switch(curPos)
 						{
 							case 0:
-								linePosition.startX = tiles[i].x + tiles[i].width * .5;
-								linePosition.startY = tiles[i].y + tiles[i].height * .5;
+								startX = tiles[i].x + tiles[i].width * .5;
+								startY = tiles[i].y + tiles[i].height * .5;
 								curPos++;
 							case 1:
 								curPos++;
 							case 2:
-								linePosition.endX = tiles[i].x + tiles[i].width * .5;
-								linePosition.endY = tiles[i].y + tiles[i].height * .5;
-								endedGame = true;
+								endX = tiles[i].x + tiles[i].width * .5;
+								endY = tiles[i].y + tiles[i].height * .5;
 						}
 					}
 				}
 			}
 		}
-	}
-	
-	public function drawWinLine():Void
-	{
-		if (endedGame) game.addChild(new Line(linePosition.startX, linePosition.startY, linePosition.endX, linePosition.endY, 10, 0xFF80FF, true, 1));
+		
+		if (won) game.addChild(new Line(startX, startY, endX, endY, 10, 0xFF80FF, true, 1, 1));
 	}
 	
 	public function onExit():Void

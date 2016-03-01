@@ -12,8 +12,6 @@ import openfl.events.Event;
  * @author Reinier de Vries
  */
 
-typedef Position = { startX:Float, startY:Float, endX:Float, endY:Float };
-
 class Main extends Sprite
 {
 	private var initialized:Bool;
